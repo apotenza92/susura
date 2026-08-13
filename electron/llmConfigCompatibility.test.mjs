@@ -9,7 +9,7 @@ describe('bundled Pi model compatibility', () => {
   it('pins the Pi release used to validate the configured providers', () => {
     const packageJson = require('../package.json');
 
-    expect(packageJson.dependencies['@earendil-works/pi-coding-agent']).toBe('0.83.0');
+    expect(packageJson.dependencies['@earendil-works/pi-coding-agent']).toBe('0.84.1');
   });
 
   it('resolves every advertised cloud model through the bundled Pi runtime', async () => {
@@ -31,7 +31,7 @@ describe('bundled Pi model compatibility', () => {
 
       expect(
         runtime.getModel(providerId, modelId),
-        `${configuredModel} is missing from Pi 0.83.0`
+        `${configuredModel} is missing from Pi 0.84.1`
       ).toMatchObject({
         id: modelId,
         provider: providerId

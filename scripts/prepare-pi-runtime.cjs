@@ -45,8 +45,8 @@ const rootUndici = readPackage(rootUndiciPackage);
 const piPackage = readPackage(piPackagePath);
 
 if (
-  piPackage.version !== '0.83.0'
-  || !['8.5.0', requiredUndiciVersion].includes(piPackage.dependencies?.undici)
+  piPackage.version !== '0.84.1'
+  || !['8.9.0', requiredUndiciVersion].includes(piPackage.dependencies?.undici)
 ) {
   console.error(
     `Refusing to prepare unexpected Pi ${piPackage.version ?? 'unknown'} `
@@ -94,7 +94,7 @@ if (fs.existsSync(nestedBraceExpansionDir)) {
 if (fs.existsSync(nestedUndiciDir)) {
   const nestedPackage = readPackage(path.join(nestedUndiciDir, 'package.json'));
 
-  if (nestedPackage.version !== '8.5.0' && nestedPackage.version !== requiredUndiciVersion) {
+  if (nestedPackage.version !== '8.9.0' && nestedPackage.version !== requiredUndiciVersion) {
     console.error(`Refusing to replace unexpected Pi undici ${nestedPackage.version ?? 'unknown'}.`);
     process.exit(1);
   }
