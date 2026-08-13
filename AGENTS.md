@@ -48,3 +48,4 @@ Caul is a calm, private desktop assistant for live calls and screen work. Priori
 - Keep the download-page publisher manual-only because it writes to another repository.
 - Publish Homebrew casks only after public package verification. The tag-only release workflow attaches and attests the standard checksum-sealed bundle, then uses the protected dispatch-only GitHub App credential to invoke the tap-owned publisher without waiting. The tap reports and retries publication independently. Source workflows never write the tap.
 - Keep releases restricted to deliberate `v*` tags whose commits are reachable from `main`.
+- Keep the ordinary release updater gate on the primary Windows x64 and Linux x64 targets. Run ARM64 updater lifecycles through full qualification when updater, packaging, native dependency or architecture support changes.

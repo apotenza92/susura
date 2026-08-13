@@ -216,8 +216,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: arm64
-            runner: windows-11-arm
           - arch: x64
             runner: windows-2025
     steps:
@@ -344,8 +342,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: arm64
-            runner: ubuntu-24.04-arm
           - arch: x64
             runner: ubuntu-24.04
     steps:
@@ -1151,6 +1147,7 @@ jobs:
       ref: ${{ needs.prepare.outputs.tag }}
       release-channel: ${{ needs.prepare.outputs.channel }}
       version: ${{ needs.prepare.outputs.version }}
+      scope: primary
 
   publish-release:
     name: Publish GitHub release

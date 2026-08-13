@@ -18,6 +18,11 @@ on:
         description: Candidate package version
         required: true
         type: string
+      scope:
+        description: Primary release targets or the full qualification matrix
+        required: false
+        default: full
+        type: string
 
 env:
   NODE_VERSION: "22.22.1"
@@ -32,11 +37,7 @@ jobs:
       fail-fast: false
       matrix:
         channel: ${{ fromJSON(inputs.release-channel == 'stable' && '["stable","beta"]' || '["beta"]') }}
-        target:
-          - windows-arm64
-          - windows-x64
-          - linux-arm64
-          - linux-x64
+        target: ${{ fromJSON(inputs.scope == 'primary' && '["windows-x64","linux-x64"]' || '["windows-arm64","windows-x64","linux-arm64","linux-x64"]') }}
         include:
           - target: windows-arm64
             platform: windows
