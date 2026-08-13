@@ -463,6 +463,20 @@ describe('macOS release contract', () => {
       needs: ['prepare', 'build-windows', 'build-linux'],
       uses: './.github/workflows/native-updater-audit.yml'
     });
+    expect(release.jobs['build-windows'].strategy.matrix.include).toEqual([
+      { arch: 'arm64', runner: 'windows-11-arm' },
+      { arch: 'x64', runner: 'windows-2025' }
+    ]);
+    expect(release.jobs['build-linux'].strategy.matrix.include).toEqual([
+      { arch: 'arm64', runner: 'ubuntu-24.04-arm' },
+      { arch: 'x64', runner: 'ubuntu-24.04' }
+    ]);
+    expect(release.jobs['test-windows-upgrade'].strategy.matrix.include).toEqual([
+      { arch: 'x64', runner: 'windows-2025' }
+    ]);
+    expect(release.jobs['test-linux-upgrade'].strategy.matrix.include).toEqual([
+      { arch: 'x64', runner: 'ubuntu-24.04' }
+    ]);
     expect(release.jobs['seal-tuf'].needs).toEqual(['prepare', 'build-windows', 'build-linux']);
     const priorFeedCheckout = release.jobs['seal-tuf'].steps.find(
       (step) => step.name === 'Checkout prior updater metadata'
