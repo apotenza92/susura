@@ -381,7 +381,7 @@ describe('macOS release contract', () => {
     expect(mint.with.repositories).toBe('homebrew-tap');
     const dispatch = job.steps.at(-1).run;
     expect(dispatch).toContain('publish-homebrew-v1');
-    expect(dispatch).toContain('gh run watch');
+    expect(dispatch).not.toContain('gh run watch');
     expect(dispatch).not.toContain('git push');
   });
 
