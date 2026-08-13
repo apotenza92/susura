@@ -56,8 +56,8 @@ if (prohibitedFiles.length > 0) {
 const piPackage = JSON.parse(
   extractFile(asarPath, 'node_modules/@earendil-works/pi-coding-agent/package.json').toString('utf8')
 );
-if (piPackage.version !== '0.83.0') {
-  throw new Error(`Expected bundled Pi 0.83.0; received ${piPackage.version ?? 'none'}.`);
+if (piPackage.version !== '0.84.1') {
+  throw new Error(`Expected bundled Pi 0.84.1; received ${piPackage.version ?? 'none'}.`);
 }
 
 const nestedBraceExpansionPrefix = '/node_modules/@earendil-works/pi-coding-agent/node_modules/brace-expansion/';
