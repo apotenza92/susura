@@ -10,7 +10,21 @@ on:
         description: Git ref to validate when called by another workflow
         required: false
         type: string
+      scope:
+        description: Deterministic checks only or the full platform preflight
+        required: false
+        default: full
+        type: string
   workflow_dispatch:
+    inputs:
+      scope:
+        description: Validation scope
+        required: true
+        default: full
+        type: choice
+        options:
+          - full
+          - deterministic
 
 env:
   NODE_VERSION: "22.22.1"
@@ -76,6 +90,7 @@ jobs:
         run: node scripts/verify-pi-licences.cjs
 
   platform-preflight:
+    if: inputs.scope != 'deterministic'
     name: Build preflight (${{ matrix.label }})
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45

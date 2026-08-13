@@ -46,5 +46,7 @@ Caul is a calm, private desktop assistant for live calls and screen work. Priori
 
 - Keep deterministic verification manually dispatchable and callable by the tag-only release workflow. Do not run routine push or pull-request CI.
 - Keep the download-page publisher manual-only because it writes to another repository.
-- Publish Homebrew casks only from the tag-only release workflow after public package verification. Attach and attest the standard checksum-sealed bundle, then use the protected dispatch-only GitHub App credential to invoke the tap-owned publisher and wait for exact public-byte verification. Source workflows never write the tap.
+- Publish Homebrew casks only after public package verification. The tag-only release workflow attaches and attests the standard checksum-sealed bundle, then uses the protected dispatch-only GitHub App credential to invoke the tap-owned publisher without waiting. The tap reports and retries publication independently. Source workflows never write the tap.
 - Keep releases restricted to deliberate `v*` tags whose commits are reachable from `main`.
+- Keep the ordinary release updater gate on the primary Windows x64 and Linux x64 targets. Run ARM64 updater lifecycles through full qualification when updater, packaging, native dependency or architecture support changes.
+- Tag workflows reuse deterministic CI only. Do not run platform package preflight immediately before the signed release jobs compile the same native resources. Keep full platform preflight manually dispatchable.
